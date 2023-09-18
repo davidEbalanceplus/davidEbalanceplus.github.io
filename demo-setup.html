@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">eBalancePlus</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="dropdown-item" href="index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="dropdown-item" href="architecture.html">Proposed Architecture</a>
+          </li>
+          <li class="nav-item">
+              <a class="dropdown-item" href="demo-setup.html">Demo</a>
+          </li>
+          <li class="nav-item">
+            <a class="dropdown-item" href="to-do.html">To Do</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+     
+
+      <div class="container">
+        <h4>This demo is a partial implementation of the proposed architecture
+        </h4>
+        <p style="margin-top: 50px;">Setup</p>
+        <img src="demo-buildings-setup.png" style="height: 700px;"/>
+        <hr/>
+        <h4 style="margin-top: 5%;">Network Setup in ISEN building</h4>
+        <img src="ISEN_network_setup.png"/>
+        <h4 style="margin-top: 5%;">Network Setup in ISA and HEI building</h4>
+        <img src="ISA_HEI_network_setup.png" style="height: 700px;">
+        <div>
+          <p>The console on the left represents the ISEN building</p>
+          <p>There are three consoles in HEI, the top-most console represents the Z1 and the other two are the clients in the building</p>
+          <p>ISA is on the right and it has the same setup as the HEI building</p>
+          <p>Note that the clients are identified as LED_1 and LED_2</p>
+          <strong>I describe the vital sections of the python codes below</strong>
+          <p><code>rxtxpkts.py</code> contains the code for sending and receiving LoRa commands. If a LoRa command is receieved by the LoRa-E5 dev kit in a building, by default, LoRa-E5 dumps the received command to a serial port (in this case, /dev/serial0), the command is then formatted and sent to the Z1 over the /dev/ttyUSB0 port using <code> os.system(f"echo {cmd} > /dev/ttyUSB0")</code><br/>The command is then sent from the Z1 to a Zn  to control an LED<br/> </p> 
+          <code>control_led[1|2].py</code> contains the code to turn on or off an LED
+          <p><code></code></p>
+        </div>
+        <div class="embed-responsive embed-responsive-16by9">      
+          <video controls class="embed-responsive-item">
+            <source src="demo.mov" type="video/mp4"/>
+            "Yowser does not support the video tag"
+          </video> 
+        </div>
+       
+      </div>
+  
+  </body>
+</html>

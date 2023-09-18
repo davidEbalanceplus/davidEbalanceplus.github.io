@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">eBalancePlus</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="dropdown-item" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" href="architecture.html">Proposed Architecture</a>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" href="demo-setup.html">Demo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="dropdown-item" href="to-do.html">To Do</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-1 col-4">
+                <div class="container" >
+                    <ul class="nav flex-column fixed-top" style="margin-top:6% ;width: 16%;">
+                        <li class="nav-item">
+                            <a  class="nav-link" href="#duty-cycle-section" style="background-color: grey;border: solid 1px black;color:white;padding: 0; text-align: center;">SECTIONS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  class="nav-link" href="#duty-cycle-section">Duty Cycle</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#rssi-snr-section">RSSI and SNR</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#spreading-factor-section">Spreading Factor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#data-rate-section">Data Rate</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#distance-section">Distance</a>
+                          </li>
+                         
+                          <li class="nav-item">
+                            <a class="nav-link" href="#time-on-air-section">Time On Air</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#frequencies-comparison-section">
+                                868 mHz vs 2.4 GHz</a>
+                          </li>
+                      </ul>
+                </div>    
+            </div>
+            <div class="col-lg-10 col-8">
+                <div class="container">
+                    <h5>Introduction</h5>
+                    This page contains important concepts with regards to the LoRa technology. 
+                    <h5 id="duty-cycle-section">Duty Cycle</h5>
+                    <p>
+                        The European Telecommmuications Standardard Institure (ETSI) sets the maximum duty cycle for the
+                        EU863-870
+                        frequency at 1% which is the maximum amount of time a device may spend communicating
+                    </p>
+                    <p>
+                        Some network operators like The Things Network reduce the duty cycle further than ESTI
+                        recommends. These
+                        types
+                        of restrictions are called ‘Fair Access Policy’. For example, The Things Network’s fair access
+                        policy limits
+                        the
+                        uplink airtime to 30 seconds per day per node and downlink messages to 10 messages per day per
+                        node
+                    </p>
+                    <p>
+                        In Europe, the radio spectrum allocation is the ISM band is defined in ETSI [EN300.220]
+                        The network channels can be freely attributed by the network operator. However the the three
+                        following
+                        default channels must be implemented in every EU868MHz end-device. Those channels are the
+                        minimum set that
+                        all network gateways should always be listening on
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Modulation</th>
+                                <th scope="col">Bandwidth[kHz]</th>
+                                <th scope="col">Channel Frequency[MHz]</th>
+                                <th scope="col">Bitrate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>LoRa</td>
+                                <td>125</td>
+                                <td>868.10</td>
+                                <td>DR0 to DR5</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td colspan="2">868.30</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>868.50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>
+                        The EU868 sub-band typically operates within the 868 MHz frequency range, and it is divided into
+                        several
+                        channels that LoRaWAN devices can utilise for communication. Each channel represents a specific
+                        frequency
+                        within the sub-band, and LoRaWAN gateways listen on these channel to receive data from end
+                        devices.
+                    </p>
+                    <p>
+                        The allocation of channels within the EU868 sub-band is regulated and managed by the network
+                        operator or
+                        LoRaWAN service provider. They have the flexibility to assign channels within the sub-band based
+                        on factors
+                        such as local regulation , network capacity , and interference considerations
+                    </p>
+                    <p>
+                        However, it is worth noting that the specific channel frequencies can be customised and
+                        configured by the
+                        network operator based on regional regulations and network requirements
+                    </p>
+                    <p>
+                        When a device operates in multiple sub-bands, it needs to comply with the duty cycle limitations
+                        and other
+                        regulations specific to each sub-band. The device must adjust its transmission behaviour
+                        according to the
+                        duty cycle restrictions of the active sub-band to ensure compliance with regulatory requirements
+                        and
+                        maintain fair access to the radio spectrum
+                    </p>
+                    <p>
+                        The duty cycle typically refers to the maximum aggregated transmit duty cycle for the entire
+                        band, rather
+                        than individual channels within the band. This means that the sum of all transmissions across
+                        all channels
+                        within the band should not exceed the specified duty cycle
+                    </p>
+                    <p>
+                        For example, if a LoRaWAN band has a duty cycle limit of 1%, it means that the total time spent
+                        transmitting
+                        across all channels within that band should not exceed 1% of the available time
+                    </p>
+                    <p>
+                        The LoRaWAN enforces a per sub-band duty cycle limitation. Each time a frame is transmitted in a
+                        given
+                        sub-band, the time of emission and the on-air duration of the frame are recorded for this
+                        sub-band. The
+                        sub-band cannot be used again during the next Toff seconds:
+                    </p>
+                    <p>
+                        <strong>Toff</strong>subband= (<strong>TimeOnAir</strong> / <strong>DutyCycle</strong>subband) -
+                        TimeOnAir
+                    </p>
+                    <p>
+                        During the unavailable time of a given sub-band, the device may still be able to transmit on
+                        another
+                        sub-band. If all sub-bands are unavailble, the device has to wait before any further
+                        transmission
+                    </p>
+                    <p>
+                        Example : A device just transmitted a 0.5s long frame on one default channel. This channel is in
+                        a sub-band
+                        allowing 1% duty cycle. Therefore this whole sub-band (868 - 868.6) will be unavailable for
+                        49.5s
+                    </p>
+                    <p>
+                        The table below shows the calculations for various duty cycles per day
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Duty cycle</th>
+                                <th scope="col">Equation: Time-On-Air = number of seconds per day X duty cycle</th>
+                                <th scope="col">Maximum allowed Time-On-Air per day, per device</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0.1%</td>
+                                <td>86400 x 0.1%</td>
+                                <td>86 per seconds per day</td>
+                            </tr>
+                            <tr>
+                                <td>1%</td>
+                                <td>86400 x 1%</td>
+                                <td>864 seconds per day</td>
+                            </tr>
+                            <tr>
+                                <td>10%</td>
+                                <td>86400 x 10%</td>
+                                <td>8640 seconds per day</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5>EU863 - 870 Data Rate and End-point Output Encoding</h5>
+                    <p>The following encoding is used for Data Rate (DR) and End-point Output Power(TXPower) in the
+                        EU863-870 band:
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">TXPower</th>
+                                <th scope="col">Configuration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0</td>
+                                <td>20 dBm ( if supported )</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>14 dBm</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>11 dBm</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>8 dBm</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>5 dbm</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>2 dbm</td>
+                            </tr>
+                            <tr>
+                                <td>6..15</td>
+                                <td>RFU</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5 id="spreading-factor-section">Spreading Factors</h5>
+                    <p>LoRa is based on Chirp Spread Spectrum (CSS) technology, where chrips (also known as symbols) are
+                        the carrier
+                        of data</p>
+                    <p>The spreading factor controls the chirp rate, and thus control the speed of data transmission
+                        Lower spreading factors means faster chirps and therefore a higher data transmission rate
+                    </p>
+                    <p>
+                        For every increase in spreading factor, the chirp sweep rate is halved, and so the data
+                        transmission rate is
+                        halved
+                    </p>
+                    <p>
+                        Lower spreading factors reduce the range of LoRa transmission, because they reduce the
+                        processing gain and
+                        increase the bit rate. Changing spreading factor allows the network to increase or decrease data
+                        rate for
+                        each end device at the cost of range
+                    </p>
+                    <p>
+                        The network also uses spreading factors to control congestion. Spreading factors are orthogonal,
+                        so signals
+                        modulated with different spreading factors and transmmitted on the same frequency channel at the
+                        same time
+                        do not interfere with each other
+                    </p>
+                    <h5>Influence of spreading factors</h5>
+                    <p>LoRa modulation has a total of 6 spreading factors from SF7 to SF12.</p>
+                    <p>Spreading factors influence:</p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Data rate</li>
+                        <li class="list-group-item">Time-on-air</li>
+                        <li class="list-group-item">Battery life</li>
+                        <li class="list-group-item">Receiver sensitivity</li>
+                    </ul>
+                    <h5 id="data-rate-section">Data rate</h5>
+                    <p>Compared to a higher spreading factor, a lower spreading factor <em>provides a higher bit
+                            rate</em> for a
+                        <strong>fixed bandwdith</strong> and <strong>coding rate</strong>
+                    </p>
+                    <p>
+                        Doubling the bandwidth also <em>doubles the bit rate </em> for a <strong>fixed spreading
+                            factor</strong> and
+                        <strong>coding rate</strong>
+                    </p>
+                    <p>
+                        The following table presents bits rates calculated with the SF7 and Coding Rate (CR) = 1 for
+                        bandwidth ,
+                        125, 250, and 500kHz
+                    </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Spreading Factor</th>
+                                <th scope="col">Bandwidth</th>
+                                <th scope="col">Bit rate (kbits/s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>7</td>
+                                <td>125</td>
+                                <td>5.5</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>250</td>
+                                <td>10.9</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>500 </td>
+                                <td>21.9</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5 id="distance-section">Distance</h5>
+                    <p>
+                        Larger spreading factors mean larger processing gain, so a signal modulated with a larger
+                        spreading factor
+                        can be received with less errors compared to a signal with a lower spreadig factor, and
+                        therefore travel a
+                        longer distance. For example, a signal modulated with the SF12 can travel a longer distance than
+                        a signal
+                        modulated with SF7
+                    </p>
+                    <h6>Fresnel Zone</h6>
+                    <p>The Fresnel zone is an elliptical shaped body around the direct line of sight path between the
+                        end node and the gateway</p>
+                    <p> Any obstacle within this volume , for example buildings, trees, hilltops or ground can weaken
+                        the transmitted signal even if there is a direct line of sight between the end node and the
+                        gateway</p>
+                    <p> The maximum radius of the Fresnel zone, located half the distance between end node and gateway
+                        is calculated as follows:</p>
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="fresnel-zone.png" style="height: 400px;" />         
+                            </div>
+                        </div>
+                    <h5 id="time-on-air-section">Time On Air</h5>
+                    <p>
+                        Compared to a lower spreading factor, sending a fixed amount of data(payload) with a higher
+                        Spreading Factor
+                        and a fixed bandwidth needs longer time-on-air
+                    </p>
+                    <p>The Things Network’s LoRaWAN airtime calculator can be used to calculate the time-on-air using
+                    </p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Input bytes (payload size)</li>
+                        <li class="list-group-item">Bandwidth</li>
+                        <li class="list-group-item">Spreading factor</li>
+                    </ul>
+                    <a href="https://www.thethingsnetwork.org/airtime-calculator"
+                        target="_blank">https://www.thethingsnetwork.org/airtime-calculator</a>
+
+                    <h5>Battery Life</h5>
+                    <p>The battery life of an end device is highly dependent on the spreading factor used. Higher
+                        spreading factors
+                        result in longer active times for the radio transcievers hence shorter battery life.
+                    </p>
+                    <h5>Receiver Sensitivity</h5>
+                    <p>Higher spreading factors provide higher receiver sensitivity. Usually, LoRa uses higher spreading
+                        factors when the signal is weak</p>
+                    <p>The following table shows how spreading factors impact the receiver sensitivity</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Spreading Factor</th>
+                                <th scope="col">Receiver sensitivity for bandwidth fixed at 125kHz</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SF7</td>
+                                <td>-123 dBm</td>
+                            </tr>
+                            <tr>
+                                <td>SF8</td>
+                                <td>-126 dBm</td>
+                            </tr>
+                            <tr>
+                                <td>SF9</td>
+                                <td>-129 dBm </td>
+                            </tr>
+                            <tr>
+                                <td>SF10</td>
+                                <td>-132 dBm </td>
+                            </tr>
+                            <tr>
+                                <td>SF11</td>
+                                <td>-134.5 dBm </td>
+                            </tr>
+                            <tr>
+                                <td>SF12</td>
+                                <td>-137 dBm </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>The receiver sensitivity indicates the minimum power level required for the receiver to reliably
+                        detect and demodulate a signal. A lower dBm value indicates better sensitivty, as it means the
+                        receiver can detect weaker signals.</p>
+
+                    <p>The receiver sensitivity direclty impacts the range of communication in LoRaWAN</p>
+
+                    <h4 id="rssi-snr-section">RSSI and SNR</h4>
+                    <p>In wireless communication, a receiver needs a good<em> signal strength</em> and a
+                        <em>signal-to-noise ratio</em> to separate the original signal from the modulated carrier. </p>
+                    <h5>RSSI</h5>
+                    <p>RSSI (Received Signal Strength Indicator) is a relative measurement that help you determine if
+                        the received signal is strong enough to get a good wireless connection from the transmitter.
+                        <em>RSSI is measured in dBm and its value is in a negative form. The closer the RSSI value is to
+                            zero, the stronger the received signal is
+                        </em></p>
+                    <p>
+                        Apart from the <strong>output power of the transmitter</strong>, the following factors mainly
+                        influence the RSSI:
+                    </p>
+                    <ul class="list-group">
+                        <li class="list-group-item">Path loss</li>
+                        <li class="list-group-item">Antenna gain</li>
+                        <li class="list-group-item">Cable/connector loss</li>
+                    </ul>
+                    <h5>SNR</h5>
+                    <p>SNR (Signal-to-Noise Ratio), often written as S/N, is the ratio of the received signal power to
+                        the noise floor. <em>SNR is commonly used to determine the quality of the received signal</em>
+                    </p>
+                    <p>SNR can be calculated using the following formula and is often expressed in decibels (dB):</p>
+                    <p>SNR(dB) = P<sub>received signal</sub>(dBm) - P<sub>noise</sub>(dBm)</p>
+                    <p>If the RSSI is above the noise floor the receiver can easily demodulate the signal.
+                    </p>
+                    <p>Here is a good example of a positive SNR:</p>
+                    <img src="RSSI-SNR-graph.png" style="height: 400px;" />
+                    <p>By looking at the above graph you can see that the RSSI is about -65 dBm and the noise floor is
+                        about -90 dBm. By using these values you can calculate the SNR as follows:
+                    </p>
+
+                    <p>
+                        SNR (dB)= P<sub>received_signal</sub>(dBm) - P<sub>noise</sub>(dBm)
+                    </p>
+                    <p>
+                        SNR (dB) = -65 dBm - (-90 dBm) = 25 dB
+                    </p>
+                    <p>
+                        <strong>The positive SNR means that the signal power is greater than the noise power, I.e. the
+                            receiver will be able to demodulate the signal
+                        </strong>
+                    </p>
+
+                    <p>If the RSSI is below the noise floor, it is impossible to demodulate the signal. However, LoRa
+                        can demodulate signals that are below the noise floor. The minimum SNR required for demodulation
+                        at different spreading factors is shown in the table below:</p>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Spreading Factor (RegModulationCfg)</th>
+                                <th scope="col">Spreading Factor (Chips/symbol)</th>
+                                <th scope="col">LoRa Demodulator SNR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>6</td>
+                                <td>64</td>
+                                <td>-5 dB</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>128</td>
+                                <td>-7.5 dB</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>256</td>
+                                <td>-10 dB</td>
+                            </tr>
+                            <tr>
+                                <td>9 </td>
+                                <td>512</td>
+                                <td>-12.5 dB</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>1024</td>
+                                <td>-15 dB</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>2048</td>
+                                <td>-17.5 dB</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>4096</td>
+                                <td>-20 dB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h5 id="frequencies-comparison-section"> LoRa 868 MHz vs LoRa 2.4 GHz</h5>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">LoRa 868 MHz</th>
+                                <th scope="col">LoRa 2.4 GHz</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Max Range (urban)</td>
+                                <td>5 - 10 km</td>
+                                <td>1km</td>
+                            </tr>
+                            <tr>
+                                <td>Interference</td>
+                                <td>Less susceptible</td>
+                                <td>More susceptible</td>
+                            </tr>
+                            <tr>
+                                <td>Max Bandwidth</td>
+                                <td>250 kHz</td>
+                                <td>1625 kHz</td>
+                            </tr>
+                            <tr>
+                                <td>Max Data Rate </td>
+                                <td>LoRa: 11kbps ,
+                                    FSK: 50kbps</td>
+                                <td>254 kbps</td>
+                            </tr>
+                            <tr>
+                                <td>Penetration</td>
+                                <td>Better</td>
+                                <td>Good</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Penetration:</strong> LoRa at 868 MHz has a better penetration ability than its 2.4 GHz
+                        counterpart hence it is a better option in environments where there are many obstacles such as
+                        buildings between the transmitter and the reciever. A typical example is an ubran environment.
+                    </p>
+                    <p><strong>Duty Cycle: </strong>868 MHz band has a duty cycle of 1% but there is no duty cycle
+                        limitation in the 2.4 GHz band so devices may generate traffic with higher intensity. However,
+                        higher load may also lead to increased contention and worse performance when too many devices
+                        compete for the channel. Both 868 MHz and 2.4 GHz band share some other limitations such as the
+                        maximum transmission (Tx) power.</p>
+                    <p><strong>Interference:</strong> The 2.4 GHz band is shared by other popular technologies such as
+                        Wi-Fi and Bluetooth hence there is a high chance for interference by those technologies.</p>
+                    <p><strong>Applications:</strong> LoRa devices that operate at 2.4 GHz are able to transmit at
+                        higher data rates because of the higher available bandwidth. A higher bandwidth allows for more
+                        accurate time-based localisation. Thus LoRa at 2.4 GHz represents an interesting solutioon for a
+                        variety of applications that involve indoor localisation, such as warehouse managemennt, but
+                        also for applications that require outdoor localisation, such as construction site monitoring,
+                        livestock tracking, etc. Since sub-GHz LoRa devices have a duty cycle regulation - they are
+                        typically used for applications that do not require frequent communication.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

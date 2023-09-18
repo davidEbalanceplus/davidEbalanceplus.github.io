@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">eBalancePlus</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="dropdown-item" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="dropdown-item" href="architecture.html">Proposed Architecture</a>
+            </li>
+            <li class="nav-item">
+                <a class="dropdown-item" href="demo-setup.html">Demo</a>
+            </li>
+            <li class="nav-item">
+              <a class="dropdown-item" href="to-do.html">To Do</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="row">
+            <div class="col-12">
+              <ul>
+                <li>
+                  <p>Modify the work done to capture the full implementation described in the <strong>Proposed Architecture</strong> section</p>
+                </li>
+                <li>
+                <p>
+                    Note that  the size of packets on a network can be limited both by hardware specifications and by protocol conventions therefore in determining the size of the packets to be transmitted from ZigBee to LoRa , <strong>the intermediate hardware (raspberry Pi)</strong> , and the<strong> max size allowed for the LoRa packet</strong> using <strong>The LoRa - E5 dev kit AT commands</strong>  must be taken into consideration
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Since a wireless communication can be intercepted , the transmissions must be encrypted to enhance security
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    A more efficient way of sending data from the Raspberry Pi to the Z1 server over /dev/ttyUSB0 must be implemented.
+                    Currently, I invoke a shell and use the <code>echo</code> command to write data to the port.
+                    I tried writing to the port using <code>zol_ser.write()</code> but the <strong>udp-server.c</strong>  didn't capture the event even though the write was successful.<br/>
+                             The snippet of code responsible for capturing serial_line event is shown below<br/>
+                      <code>        
+                          PROCESS_WAIT_EVENT_UNTIL(ev == serial_line_event_message);
+                      </code>
+                      <br/>However,  I was able to capture the event with  
+                      <br/>
+                        <code>
+                          os.system(f"echo {cmd} > /dev/ttyUSB0")
+                        </code>
+                          <br/>
+                      This approach not very efficient.
+                    </li>
+                    <li>
+                      Lastly, I would like to emphasise that there might be other problems that I couldn't discover so look out for issues you think can arise from the proposed architecture to the implementation
+                    </li>
+
+                    </ul>
+            </div>
+        </div>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Title</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="index.css" rel="stylesheet" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">eBalancePlus</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="dropdown-item" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="dropdown-item" href="architecture.html">Proposed Architecture</a>
+        </li>
+        <li class="nav-item">
+          <a class="dropdown-item" href="demo-setup.html">Demo</a>
+        </li>
+        <li class="nav-item">
+          <a class="dropdown-item" href="to-do.html">To Do</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p>
+          In this context, a <strong>A Local Area Network(LAN)</strong> is a Zigbee-LoRa setup in a building.
+          For the purpose of identifcation, each network is assigned an <strong>ID</strong>
+        <p><strong>Figure 1.0</strong> shows how a Local Network is setup and the subsequent <strong>Figures</strong>
+          revealing further details of some aspects of the setup
+        </p>
+        </p>
+        <p>
+          A <strong>Wide Area Network (WAN) </strong>consists of several Local Area Networks
+        </p>
+        <p>
+          <strong>Figure 0.0</strong> is an example WAN consisting of seven(7) LANs
+        </p>
+        <hr />
+        <h4>Figure 0.0 : Wide Area Network</h4>
+        <img src="./multi-hop-setup.png" style="height: 550px;" />
+        <hr />
+        <p>Assuming Network_1 wants to send a Zigbee command to Network_4, it transmits the command using LoRa
+          technology , the command is received by all the networks in range(in the figure above, NETWORK_2 and NETWORK_3
+          are the networks in the range of NETWORK_1), each received network determines if it is the intended recipient
+          of the command, if yes, it performs the command, otherwise it checks if it is setup as the intermediate for
+          the intended recipient, if yes, it also transmits the command and the process repeats until it reaches the
+          intended recipient.
+          <strong>Figure 1.1</strong> reveals the details of this decision making process
+        <p>As shown above, both NETWORK_2 and NETWORK_3 receive the command,NETWORK_2 transmits the command since it
+          is set up as the intermediate for NETWORK_4 , NETWORK_3 ignores the command because it is neither the intended
+          recipient nor the intermediate for NETWORK_4
+        </p>
+        <p>
+
+        </p>
+
+        </p>
+        <hr />
+      </div>
+      <div class="col-12">
+        <h4>Figure 1.0 : Local Area Network</h4>
+        <img src="./proposed-architecture.png" />
+        <hr />
+      </div>
+      <div class="col-12">
+        <h4>Figure 1.1</h4>
+        <img src="./rasp_cmd_processing_lora.png" />
+        <hr />
+      </div>
+      <div class="col-12">
+        <h4>Figure 1.2</h4>
+        <img src="./rasp-zn-equipment.png" />
+        <hr />
+      </div>
+      <div class="col-12">
+        <h3>Figure 1.3 : </h3>
+        <h4>Interaction between Raspberry Pi and Lora - E5 dev kit</h4>
+        <img src="./raspberryPi_LoRa_kit.png" style="height: 100px;" />
+        <p><a href="#AT-commands-section">See AT commands below</a></p>
+        <hr />
+      </div>
+      <div class="col-12">
+        <h3>Gateway</h3>
+        <p>The Z1(Server) , the Raspberry Pi, and the LoRa - E5 dev kit together form the gateway</p>
+        <p>All zigbee communications within a building and inter-buildings communications go through the Z1 server</p>
+        <p>If a client wants to send a command to another client,
+          it sends it to the Z1 server, the Z1 server checks if the intended recipient is within the same building, if
+          yes , it sends it to that client, if no,
+          it sends it over to the raspberry Pi to encapsulate the Zigbee command into a LoRa command for transmission
+          using LoRa technology with the LoRa-e5 dev kit
+        </p>
+      </div>
+      <div class="col-12">
+        <h4>LoRa - E5 dev kit</h4>
+        <img src="LoRa-e5.png" style="height: 350px;" />
+      </div>
+      <p>
+        A LoRa development kit powered by ARM Cortex - M4 core and Semtech SX126x. The SX126x is fully compatible with
+        other chips like the LR1121.
+
+      </p>
+      <p>
+        LoRa-E5 Dev kit embedded with Wio-E5 STM32WLE5JC LoRa module that supports Long Range protocol on the global
+        frequency band. It provides full GPIOs, which support various data protocols and interfaces such as RS485,
+        Grove, male/female headers, etc.
+      </p>
+      <div class="col-12">
+        <img src="LoRa-e5-hardware-spec.png" style="display: block;" />
+      </div>
+      <div class="col-12">
+        <img src="LoRa-e5-pinout.png" style="display: block;" />
+      </div>
+      <div class="col-12">
+        <img src="LoRa-e5-spec.jpg" style="height: 700px;width: 550px;display: block;" />
+      </div>
+      <div class="col-12">
+        <h4 id="AT-commands-section"> AT commands</h4>
+      </div>
+      <div class="col-12">
+        <p>LoRa-E5 has a built-in AT command firmware.
+        </p>
+        <p>
+          With this AT command firmware, developers can quickly build their prototype or application.
+        </p>
+        <p>The device can work in several modes(LWABP, LWOTAA, TEST)</p>
+        <p>
+          <em>LWABP is short for LoRaWAN Activation By Personalization</em>
+        </p>
+        <p>
+          <em> LWOTAA is short for LoRaWAN Over-The-Air-Activation</em>
+        </p>
+        <p>
+          However, we use the <strong>TEST</strong> mode for just LoRa communication
+        </p>
+        <p>
+          In the Test Mode, we use the TXLRSTR to transmit a string format packet and the RXLRPKT to receive a LoRa
+          packet.<br />
+          Note that when using RXLRPKT, the received packet will be in hex format and hence must be converted to a
+          string to get the original string that was sent
+        </p>
+        <h6>Command sequence to send LoRa packet:</h6>
+        <code>
+       
+// Set test mode<br/>
+AT+MODE=TEST<br/>
+// Set RF Configuration<br/>
+AT+TEST=RFCFG,[FREQUENCY],[SF],[BANDWIDTH],[TXPR],[RXPR],[POW],[CRC],[IQ],[NET]<br/>
+eg;AT+TEST=RFCFG,868,SF12,125,12,15,14,ON,OFF,OFF<br/>
+// Send TEXT format packet <br/>
+ AT+TEST=TXLRSTR, "TEXT" <br/>
+ eg:AT+TEST=TXLRSTR, "Hello World"<br/>
+        </code>
+        <strong>Note that sending these commands over serial communication with the pySerial requires you to send each command in the form of a string and add the newline character or a carriage return and a newline character as shown below and writing to the device's serial port as sequence of bytes using the <em>write</em> and <em>encode</em> methods as shown below</strong> eg:<br/><br/>
+        <code>
+          <p>command = 'AT+MODE=TEST\r\n'</p>
+          <p>ser.write(command.encode())</p>
+        </code>
+        <p>Refer to section 4.36 <a href="https://files.seeedstudio.com/products/317990687/res/LoRa-E5%20AT%20Command%20Specification_V1.0%20.pdf" target="_blank">AT command specification</a> for more details concering the usage of TEST mode.</p>
+        <p>You may also refer to other sections for more information about other details that may interest you.</p>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+</body>
+
+</html>
